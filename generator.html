@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generator Undangan – Suhaimy & Arni</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/generator.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="gen-body">
+
+  <div class="gen-container">
+    <div class="gen-header">
+      <h1 class="gen-title">Generator Undangan</h1>
+      <p class="gen-sub">Walimatul 'Urs – Suhaimy & Arni</p>
+    </div>
+
+    <!-- Base URL config -->
+    <div class="gen-section">
+      <label class="gen-label">Base URL Undangan</label>
+      <input type="text" id="baseUrl" class="gen-input" placeholder="https://username.github.io/wedding-suhaimy" />
+      <p class="gen-hint">Isi dengan URL hosting website undangan Anda</p>
+    </div>
+
+    <!-- Input nama -->
+    <div class="gen-section">
+      <label class="gen-label">Daftar Nama Tamu</label>
+      <p class="gen-hint">Masukkan satu nama per baris</p>
+      <textarea id="nameInput" class="gen-textarea" rows="8" placeholder="Contoh:&#10;Budi Santoso&#10;Siti Rahayu&#10;Ahmad Fauzi"></textarea>
+    </div>
+
+    <button class="gen-btn" onclick="generateLinks()">
+      <i class="fa fa-wand-magic-sparkles"></i> Generate Undangan
+    </button>
+
+    <!-- Hasil -->
+    <div id="resultSection" class="result-section" style="display:none;">
+      <div class="result-header">
+        <h2 class="result-title">Link Undangan</h2>
+        <button class="btn-copy-all" onclick="copyAll()">
+          <i class="fa fa-copy"></i> Salin Semua
+        </button>
+      </div>
+      <div id="linkList" class="link-list"></div>
+    </div>
+
+    <!-- Cara penggunaan -->
+    <div class="gen-guide">
+      <h3><i class="fa fa-circle-info"></i> Cara Penggunaan</h3>
+      <ol>
+        <li>Isi Base URL dengan alamat website undangan yang sudah di-hosting</li>
+        <li>Masukkan nama-nama tamu undangan (satu per baris)</li>
+        <li>Klik "Generate Undangan"</li>
+        <li>Salin link lalu kirimkan ke masing-masing tamu via WhatsApp</li>
+        <li>Saat tamu membuka link, nama mereka akan tampil otomatis di halaman undangan</li>
+      </ol>
+      <div class="gen-example">
+        <p><strong>Contoh:</strong></p>
+        <code>https://username.github.io/wedding-suhaimy/?to=Budi+Santoso</code>
+        <p>→ Tamu akan disambut: <em>"Kepada Yth. Budi Santoso"</em></p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/generator.js"></script>
+</body>
+</html>

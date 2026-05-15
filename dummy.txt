@@ -1,0 +1,27 @@
+                <div class="event-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="event-icon"><i class="fa fa-mosque"></i></div>
+                    <h3 class="event-title">Akad Nikah</h3>
+                    <p class="event-time"><i class="fa fa-clock"></i> Pukul 09:00 WIB</p>
+                    <p class="event-place">
+                        <i class="fa fa-location-dot"></i><br />
+                        Masjid Jami' Al-Hikmah<br />
+                        <small>Kp. Cigaroggol RT 06 RW 02 Taman Buah Mekarsari, Cileungsi – Bogor</small>
+                    </p>
+                    <a class="btn-maps" href="https://maps.app.goo.gl/YourAkadMapLink" target="_blank">
+                        <i class="fa fa-map-location-dot"></i> Lihat Lokasi
+                    </a>
+                </div>
+
+                <div class="event-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="event-icon"><i class="fa fa-champagne-glasses"></i></div>
+                    <h3 class="event-title">Resepsi</h3>
+                    <p class="event-time"><i class="fa fa-clock"></i> Pukul 10:00 WIB – Selesai</p>
+                    <p class="event-place">
+                        <i class="fa fa-location-dot"></i><br />
+                        Kp. Cigarogol RT 06 RW 02<br />
+                        <small>DS. Mekarsari, Cileungsi – Bogor</small>
+                    </p>
+                    <a class="btn-maps" href="https://maps.app.goo.gl/YourResepsiMapLink" target="_blank">
+                        <i class="fa fa-map-location-dot"></i> Lihat Lokasi
+                    </a>
+                </div>

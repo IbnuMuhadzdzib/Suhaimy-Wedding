@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Undangan Pernikahan – Suhaimy & Arni</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+
+<link href="./src/output.css" rel="stylesheet">
+</head>
+<body class="cover-body">
+
+  <!-- Floating leaves canvas -->
+  <canvas id="leavesCanvas"></canvas>
+
+  <!-- Flower decorations top -->
+  <img class="deco deco-top-left" src="https://www.freepng.es/png-f4bywp/download.html" alt="" onerror="this.src='https://pngimg.com/uploads/rose/rose_PNG66.png'" />
+  <img class="deco deco-top-right" src="https://pngimg.com/uploads/rose/rose_PNG66.png" alt="" />
+  <img class="deco deco-bot-left" src="https://pngimg.com/uploads/rose/rose_PNG66.png" alt="" />
+  <img class="deco deco-bot-right" src="https://pngimg.com/uploads/rose/rose_PNG66.png" alt="" />
+
+  <div class="cover-wrapper">
+    <div class="cover-card">
+
+      <!-- Top ornament -->
+      <img class="ornament-top" src="https://www.pngmart.com/files/22/Floral-Frame-PNG-Free-Image.png" alt="" onerror="this.src=''" />
+
+      <p class="cover-sub">The Wedding Of</p>
+      <h1 class="cover-names">Suhaimy<br/><span class="cover-amp">&</span><br/>Arni</h1>
+
+      <div class="cover-divider">
+        <img src="https://www.freepnglogos.com/uploads/flower-png/beautiful-flower-transparent-png-image-0.png" class="divider-flower" alt="" onerror="this.style.display='none'" />
+      </div>
+
+      <p class="cover-ayat">"Dan di antara tanda-tanda kekuasaan-Nya..."<br/><em>(Qs: Ar-Rum : 21)</em></p>
+
+      <div class="cover-guest-wrap">
+        <p class="cover-kepada">Kepada Yth.</p>
+        <p class="cover-kepada">Bapak/Ibu/Saudara/i</p>
+        <p class="cover-guest-name" id="guestName">Tamu Undangan</p>
+      </div>
+
+      <button class="btn-open" id="btnOpen" onclick="openInvitation()">
+        <span>✉</span> Buka Undangan
+      </button>
+
+      <!-- Bottom ornament -->
+      <img class="ornament-bot" src="https://www.pngmart.com/files/22/Floral-Frame-PNG-Free-Image.png" alt="" onerror="this.src=''" />
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

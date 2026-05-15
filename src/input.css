@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  /* Font Family */
+  --font-vibes: "Great Vibes", cursive;
+  --font-inria: "Inria Serif", serif;
+
+  /* Animation Utilities */
+  --animate-sway-right: sway-right 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  --animate-sway-left: sway-left 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  --animate-flower-float: flower-float 8s ease-in-out infinite;
+}
+
+/* Bunga Kanan (Original lo) */
+@keyframes sway-right {
+
+  0%,
+  100% {
+    transform: translateX(1rem) rotate(0deg);
+  }
+
+  20% {
+    transform: translateX(1rem) rotate(-8deg);
+  }
+
+  50% {
+    transform: translateX(1rem) rotate(5deg);
+  }
+
+  80% {
+    transform: translateX(1rem) rotate(-7deg);
+  }
+}
+
+/* Bunga Kiri (Flipped) */
+@keyframes sway-left {
+
+  0%,
+  100% {
+    transform: translateX(-1rem) rotate(0deg);
+  }
+
+  20% {
+    transform: translateX(-1rem) rotate(8deg);
+  }
+
+  50% {
+    transform: translateX(-1rem) rotate(-5deg);
+  }
+
+  80% {
+    transform: translateX(-1rem) rotate(7deg);
+  }
+}
+
+/* Bunga Tengah (Aesthetic & Gemes) */
+/* Bunga Tengah (Breathy Pulse) */
+@keyframes flower-float {
+  0% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+
+  20% {
+    transform: translateY(-7px) rotate(1.2deg) scale(1.025);
+  }
+
+  40% {
+    transform: translateY(-9px) rotate(1.8deg) scale(1.03);
+  }
+
+  55% {
+    transform: translateY(-4px) rotate(0.4deg) scale(1.015);
+  }
+
+  70% {
+    transform: translateY(4px) rotate(-1.4deg) scale(0.99);
+  }
+
+  85% {
+    transform: translateY(2px) rotate(-0.6deg) scale(1);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+}

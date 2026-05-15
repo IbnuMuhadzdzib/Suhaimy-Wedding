@@ -1,0 +1,248 @@
+/* ============================================================
+   WEDDING SUHAIMY & ARNI — generator.css
+   ============================================================ */
+
+body.gen-body {
+  background: #1a1a1a;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.gen-container {
+  width: 100%;
+  max-width: var(--phone-w);
+  background: var(--cream);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--gold);
+  box-shadow: var(--shadow);
+  padding: 32px 24px 40px;
+  margin: 0 auto;
+}
+
+.gen-header {
+  text-align: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--gold-light);
+}
+
+.gen-title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+
+.gen-sub {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  color: var(--gold-dark);
+  font-style: italic;
+}
+
+.gen-section {
+  margin-bottom: 20px;
+}
+
+.gen-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+
+.gen-hint {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.gen-input {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--gold-light);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.gen-input:focus { border-color: var(--gold); }
+
+.gen-textarea {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--gold-light);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.2s;
+  line-height: 1.7;
+}
+.gen-textarea:focus { border-color: var(--gold); }
+
+.gen-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 14px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(61,92,53,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 28px;
+}
+.gen-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(61,92,53,0.4); }
+.gen-btn:active { transform: scale(0.98); }
+
+/* Result section */
+.result-section {
+  margin-bottom: 28px;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.result-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--green);
+}
+
+.btn-copy-all {
+  background: var(--gold);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.2s;
+}
+.btn-copy-all:hover { background: var(--gold-dark); }
+
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link-item {
+  background: var(--cream-dark);
+  border: 1px solid var(--gold-light);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.link-name {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.link-url {
+  font-size: 11px;
+  color: var(--text-mid);
+  word-break: break-all;
+  flex: 1;
+  background: var(--white);
+  border: 1px solid var(--gold-light);
+  border-radius: 6px;
+  padding: 5px 8px;
+  cursor: text;
+  user-select: all;
+}
+
+.btn-copy-single {
+  background: var(--green);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.btn-copy-single:hover { background: var(--green-light); }
+.btn-copy-single.copied { background: #27ae60; }
+
+/* Guide section */
+.gen-guide {
+  background: var(--green);
+  color: var(--white);
+  border-radius: 12px;
+  padding: 20px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.gen-guide h3 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gen-guide ol {
+  padding-left: 18px;
+  color: rgba(255,255,255,0.85);
+}
+.gen-guide ol li { margin-bottom: 6px; }
+
+.gen-example {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 14px;
+  font-size: 12px;
+}
+.gen-example code {
+  display: block;
+  background: rgba(0,0,0,0.2);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: monospace;
+  font-size: 11px;
+  word-break: break-all;
+  color: var(--gold-light);
+  margin: 8px 0;
+}
+.gen-example em { color: var(--gold-light); }
