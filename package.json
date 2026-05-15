@@ -1,4 +1,9 @@
 {
+  "name": "undangan-nikah",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./src/output.css --content './*.html'"
+  },
   "dependencies": {
     "@tailwindcss/cli": "^4.3.0",
     "animate.css": "^4.1.1",
