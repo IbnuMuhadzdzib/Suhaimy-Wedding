@@ -105,12 +105,12 @@ function escapeJs(str) {
   return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
 }
 
-// Auto-detect base URL dari lokasi generator
-window.addEventListener('DOMContentLoaded', function () {
-  const current = window.location.href;
-  // Hapus /generator.html dari akhir URL
-  const base = current.replace(/\/generator\.html.*$/, '');
-  if (base && base.startsWith('http')) {
-    document.getElementById('baseUrl').value = base;
-  }
-});
+// Auto-detect base URL dari lokasi generator dinonaktifkan
+// agar selalu menggunakan default Netlify URL.
+// window.addEventListener('DOMContentLoaded', function () {
+//   const current = window.location.href;
+//   const base = current.replace(/\/generator\.html.*$/, '');
+//   if (base && base.startsWith('http')) {
+//     document.getElementById('baseUrl').value = base;
+//   }
+// });
