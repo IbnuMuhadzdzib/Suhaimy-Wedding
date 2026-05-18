@@ -136,7 +136,7 @@ function toggleAudio(e) {
 // 5. BOTTOM NAV — highlight section aktif saat scroll
 // ============================================================
 function initBottomNav() {
-  const sections = document.querySelectorAll('.section');
+  const sections = document.querySelectorAll('section[id]');
   const navItems = document.querySelectorAll('.nav-item');
 
   const observer = new IntersectionObserver(
