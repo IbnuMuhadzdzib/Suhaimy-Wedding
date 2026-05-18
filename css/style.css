@@ -11,7 +11,7 @@
   --gold:       #c8a96e;
   --gold-light: #e8d5a3;
   --gold-dark:  #9a7a42;
-  --green:      #3d5c35;
+  --green:      #54552D;
   --green-light:#4a6741;
   --green-pale: #e8f0e6;
   --cream:      #fdf8f0;
@@ -289,7 +289,7 @@ body.cover-body {
 }
 
 /* Responsive: on small screens fill full width */
-@media (max-width: 420px) {
+@media (max-width: 767px) {
   :root { --phone-w: 100vw; }
   .cover-wrapper { padding: 12px; }
   .cover-names { font-size: 44px; }

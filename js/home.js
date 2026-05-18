@@ -109,24 +109,26 @@ function initAudio() {
   document.addEventListener('touchstart', tryPlay);
 }
 
-function toggleAudio() {
+function toggleAudio(e) {
+  if (e) e.stopPropagation();
   const audio = document.getElementById('bgMusic');
   const icon  = document.getElementById('audioIcon');
   const ctrl  = document.getElementById('audioControl');
   if (!audio) return;
 
-  if (audioPlaying) {
+  if (!audio.paused) {
     audio.pause();
     audioPlaying = false;
     icon.className = 'fa fa-volume-xmark';
     ctrl.classList.add('muted');
     ctrl.style.animation = 'none';
   } else {
-    audio.play();
-    audioPlaying = true;
-    icon.className = 'fa fa-music';
-    ctrl.classList.remove('muted');
-    ctrl.style.animation = 'spin 4s linear infinite';
+    audio.play().then(() => {
+      audioPlaying = true;
+      icon.className = 'fa fa-music';
+      ctrl.classList.remove('muted');
+      ctrl.style.animation = 'spin 4s linear infinite';
+    }).catch(err => console.log("Play interrupted:", err));
   }
 }
 

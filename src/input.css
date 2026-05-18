@@ -3,6 +3,7 @@
 @theme {
   /* Font Family */
   --font-vibes: "Great Vibes", cursive;
+  --font-grey-qo: "Grey Qo", cursive;
   --font-inria: "Inria Serif", serif;
 
   /* Animation Utilities */

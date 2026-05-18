@@ -12,7 +12,7 @@
 // ⚠️ GANTI DENGAN URL APPS SCRIPT ANDA
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxWyCG9vjx16UZtj-pm6zPA89Z-5MbzgbIPP1Y16d2PFvzaXtD1JhxOqoTJqWjeV7WKAQ/exec';
 
-const COMMENTS_PER_PAGE = 10;
+const COMMENTS_PER_PAGE = 5;
 let allComments   = [];
 let currentPage   = 1;
 
