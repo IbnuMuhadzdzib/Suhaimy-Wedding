@@ -20,7 +20,7 @@ Dengan penuh kebahagiaan dan kerendahan hati, kami bermaksud mengundang Bapak/Ib
 
 📅 Ahad, 28 Juni 2026
 🕘 Akad : 09.00 WIB | Resepsi : 10.00 WIB
-📍 Masjid Jami' Al-Hikmah, Cileungsi – Bogor
+📍 Kp. Cigaroggol RT 06 RW 02 Taman Buah Mekarsari, Cileungsi - Bogor
 
 ✨ Berikut tautan undangan digital kami:
 ${url}
