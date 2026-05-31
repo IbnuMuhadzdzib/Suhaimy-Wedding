@@ -7,30 +7,548 @@
     <title>Walimatul 'Urs – Suhaimy & Arni</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/home.css" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Lato:wght@300;400&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-        rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Grey+Qo&display=swap" rel="stylesheet">
-
     <link href="./src/output.css" rel="stylesheet">
+
+    <style>
+        /* =====================================================
+           RESET & BASE — override anything from external CSS
+           ===================================================== */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            width: 100%;
+            background: #1a1a1a;
+        }
+
+        /* =====================================================
+           PHONE SHELL
+           ===================================================== */
+        #app-shell {
+            position: relative;
+            width: 100%;
+            max-width: 430px;
+            margin: 0 auto;
+            background: #fdf8f0;
+            overflow-x: hidden;
+            /* DO NOT set overflow-y hidden — kills sticky/fixed children */
+        }
+
+        @media (min-width: 430px) {
+            #app-shell {
+                box-shadow: 0 0 60px rgba(0,0,0,0.5);
+            }
+        }
+
+        /* =====================================================
+           SECTIONS — base rules
+           ===================================================== */
+        section {
+            position: relative;
+            width: 100%;
+        }
+
+        /* =====================================================
+           FRAME TRANSITION WRAPPER
+           These decorative frames sit BETWEEN two content
+           sections and overlap both by a fixed amount.
+           Strategy: use negative margin to pull up, do NOT
+           use h-0 + absolute positioning.
+           ===================================================== */
+        .frame-divider {
+            position: relative;
+            width: 100%;
+            /* overlap the section above by ~60px */
+            margin-top: -60px;
+            /* overlap the section below by ~60px */
+            margin-bottom: -60px;
+            z-index: 20;
+            pointer-events: none;
+            /* isolate stacking context */
+            isolation: isolate;
+        }
+
+        .frame-divider > img.frame-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .frame-divider > .frame-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            /* push text below top decorative band of the frame */
+            padding-top: 12%;
+        }
+
+        .frame-divider > .frame-text img {
+            width: 85%;
+            max-width: 340px;
+        }
+
+        /* countdown frame has text + boxes stacked vertically */
+        .frame-divider.countdown-frame > .frame-text {
+            flex-direction: column;
+            gap: 8px;
+            padding-top: 8%;
+            padding-bottom: 4%;
+            pointer-events: auto;
+        }
+
+        /* =====================================================
+           SECTION 1: HERO
+           ===================================================== */
+        #sect-cover {
+            min-height: 100svh;
+            background: #fdf8f0;
+            overflow: hidden;
+        }
+
+        .hero-flowers {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 40;
+            pointer-events: none;
+        }
+
+        .hero-flowers img {
+            /* natural width from original, but capped */
+            max-width: 45%;
+        }
+
+        .hero-img-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 85svh;
+            position: relative;
+            z-index: 10;
+            padding: 0 8px;
+        }
+
+        .hero-img-wrap img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .edge-flower-right {
+            position: absolute;
+            right: -8px;
+            bottom: 0;
+            width: clamp(90px, 26vw, 160px);
+            z-index: 40;
+            pointer-events: none;
+        }
+
+        /* =====================================================
+           SECTION 3: MEMPELAI
+           ===================================================== */
+        #sect-mempelai {
+            background: #fdf8f0;
+            /* top padding accounts for frame-divider overlap from above */
+            padding-top: 120px;
+            padding-bottom: 120px;
+            overflow: hidden;
+        }
+
+        .mempelai-inner {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .mempelai-edge-left {
+            position: absolute;
+            left: -8px;
+            width: clamp(90px, 26vw, 160px);
+            z-index: 40;
+            pointer-events: none;
+            bottom: 200px;
+        }
+
+        .mempelai-edge-right {
+            position: absolute;
+            right: -8px;
+            width: clamp(90px, 26vw, 160px);
+            z-index: 40;
+            pointer-events: none;
+            bottom: -80px;
+        }
+
+        .mempelai-quote {
+            font-family: 'Inria Serif', Georgia, serif;
+            color: #2C2C2C;
+            font-size: clamp(12px, 3.5vw, 15px);
+            text-align: center;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .mempelai-names {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .mempelai-person {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .mempelai-person img {
+            width: 80%;
+            max-width: 280px;
+        }
+
+        .mempelai-person p {
+            font-family: 'Inria Serif', serif;
+            font-size: clamp(12px, 3.5vw, 14px);
+            color: #2C2C2C;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .mempelai-boundary {
+            width: 70%;
+            max-width: 260px;
+        }
+
+        /* =====================================================
+           SECTION 4: ACARA (THE ARCH)
+           KEY FIX: The arch is a self-contained card.
+           We do NOT use absolute positioned text over a
+           percentage-padded container — that breaks on
+           every screen size differently.
+           Instead: the arch background is set as a CSS
+           background-image on the card, and we control
+           exact pixel-safe padding.
+           ===================================================== */
+        #sect-acara {
+            background: #fdf8f0;
+            padding-top: 120px;
+            padding-bottom: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .acara-edge-left {
+            position: absolute;
+            left: -8px;
+            top: 20%;
+            width: clamp(90px, 26vw, 160px);
+            z-index: 40;
+            pointer-events: none;
+        }
+
+        .acara-edge-right {
+            position: absolute;
+            right: -8px;
+            bottom: 20%;
+            width: clamp(90px, 26vw, 160px);
+            z-index: 40;
+            pointer-events: none;
+        }
+
+        /*
+          The arch card approach:
+          - outer div: position:relative, contains the bg img + content
+          - img.arch-bg: display:block, width:100%, this sets the HEIGHT
+          - div.arch-content: position:absolute, inset:0
+            padding uses % of width (not height) so it's predictable
+        */
+        .arch-card {
+            position: relative;
+            width: 88%;
+            max-width: 360px;
+            z-index: 10;
+        }
+
+        .arch-card .arch-bg {
+            display: block;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 16px rgba(0,0,0,0.1));
+        }
+
+        .arch-card .arch-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* 
+              The arch SVG has a decorative dome at the top that's
+              roughly 18% of the image height.
+              Since width ≈ height for this arch, padding-top as % of 
+              width approximates height percentage reliably.
+              We tested: 22% top clears the dome on all sizes.
+            */
+            padding: 22% 12px 8% 12px;
+            gap: 0;
+        }
+
+        /* Date row */
+        .arch-date {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-family: 'Inria Serif', serif;
+            color: #DDBF8A;
+            font-size: clamp(14px, 4vw, 20px);
+            margin-bottom: 12px;
+        }
+
+        .arch-date .sep {
+            font-size: clamp(18px, 5vw, 26px);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .arch-date .day-month {
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* Event block (Akad / Resepsi) */
+        .arch-event {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 2px;
+        }
+
+        .arch-event-title {
+            font-family: 'Great Vibes', cursive;
+            color: #DDBF8A;
+            margin: 0;
+            line-height: 1;
+            font-size: clamp(26px, 8vw, 42px);
+        }
+
+        .arch-event-time {
+            font-family: 'Inria Serif', serif;
+            color: #5a5a5a;
+            font-size: clamp(11px, 3.2vw, 15px);
+            margin: 0;
+        }
+
+        .arch-event-loc {
+            font-family: 'Inria Serif', serif;
+            color: #5a5a5a;
+            font-size: clamp(10px, 2.8vw, 13px);
+            text-align: center;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .arch-map-icon {
+            color: #DDBF8A;
+            font-size: clamp(14px, 4vw, 20px);
+            margin: 4px 0 2px;
+        }
+
+        .arch-divider {
+            width: 55%;
+            height: 1px;
+            background: #DDBF8A;
+            opacity: 0.5;
+            margin: 8px 0;
+        }
+
+        .btn-maps {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #8B7B4A;
+            color: #fff;
+            font-family: 'Inria Serif', serif;
+            font-size: clamp(12px, 3.5vw, 16px);
+            padding: 7px 18px;
+            border-radius: 24px;
+            text-decoration: none;
+            margin-top: 6px;
+        }
+
+        /* =====================================================
+           COUNTDOWN inside frame-divider
+           ===================================================== */
+        .cd-label {
+            font-family: 'Inria Serif', serif;
+            color: #ffffff;
+            font-size: clamp(11px, 3.5vw, 15px);
+            text-align: center;
+            margin: 0;
+        }
+
+        .cd-boxes {
+            display: flex;
+            gap: clamp(4px, 2vw, 10px);
+        }
+
+        .cd-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: clamp(48px, 13vw, 68px);
+            height: clamp(40px, 11vw, 56px);
+            border: 2px solid #DDBF8A;
+            border-radius: 6px;
+            background: #7D7549;
+        }
+
+        .cd-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(18px, 5.5vw, 28px);
+            font-weight: 300;
+            color: #f0ead8;
+            line-height: 1;
+        }
+
+        .cd-unit {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(8px, 2.2vw, 11px);
+            color: #f0ead8;
+        }
+
+        /* =====================================================
+           SECTION 5: ADAB WALIMAH
+           ===================================================== */
+        #sect-adab {
+            background: #fdf8f0;
+            padding-top: 120px;
+            padding-bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .adab-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .adab-title {
+            font-family: 'Great Vibes', cursive;
+            color: #DDBF8A;
+            font-size: clamp(36px, 11vw, 56px);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .adab-line {
+            width: 64px;
+            height: 1px;
+            background: #DDBF8A;
+            opacity: 0.6;
+        }
+
+        .adab-subtitle {
+            font-family: 'Inria Serif', serif;
+            font-size: clamp(11px, 3.2vw, 14px);
+            color: #5a5a5a;
+            line-height: 1.6;
+            margin: 4px 0 0;
+        }
+
+        .adab-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 12px;
+            width: 100%;
+        }
+
+        .adab-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: clamp(80px, 24vw, 110px);
+        }
+
+        .adab-card img {
+            width: clamp(52px, 16vw, 72px);
+            height: auto;
+            object-fit: contain;
+        }
+
+        .adab-card p {
+            font-family: 'Inria Serif', serif;
+            font-size: clamp(9px, 2.8vw, 12px);
+            color: #5a5a5a;
+            text-align: center;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* =====================================================
+           SECTION 7: KOMENTAR
+           ===================================================== */
+        #sect-komentar {
+            background: #fdf8f0;
+            padding-top: 120px;
+        }
+
+        /* =====================================================
+           SECTION 8: GIFT
+           ===================================================== */
+        #sect-gift {
+            background: #fdf8f0;
+        }
+
+        /* =====================================================
+           MISC UTILITY
+           ===================================================== */
+        img { max-width: 100%; height: auto; }
+
+        .font-vibes { font-family: 'Great Vibes', cursive; }
+        .font-inria { font-family: 'Inria Serif', serif; }
+        .font-grey-qo { font-family: 'Grey Qo', cursive; }
+        .text-gold { color: #DDBF8A; }
+    </style>
 </head>
 
 <body class="home-body">
 
-    <!-- Floating leaves canvas — fixed overlay -->
+    <!-- Floating leaves canvas -->
     <canvas id="leavesCanvas"></canvas>
 
     <!-- Audio -->
@@ -38,405 +556,249 @@
         <source src="assets/audio/nasyid.mp3" type="audio/mpeg" />
     </audio>
 
-    <!-- ======================================================
-       PHONE SHELL — satu kolom vertikal, center di layar
-       ====================================================== -->
-    <div class="block w-full min-h-screen relative overflow-x-hidden bg-[#fdf8f0] md:max-w-[390px] md:mx-auto md:shadow-[0_0_60px_rgba(0,0,0,0.5)]">
-        <!-- Audio control button -->
+    <div id="app-shell">
+
+        <!-- Audio control -->
         <div class="audio-control" id="audioControl" onclick="toggleAudio(event)">
             <i class="fa fa-music" id="audioIcon"></i>
         </div>
 
         <!-- Bottom Nav -->
         <nav class="bottom-nav" id="bottomNav">
-            <a class="nav-item active" data-section="sect-cover" onclick="navTo('sect-cover',this)"> <i
-                    class="fa fa-house"></i> </a>
-            <a class="nav-item" data-section="sect-mempelai" onclick="navTo('sect-mempelai',this)"><i
-                    class="fa fa-heart"></i> </a>
-            <a class="nav-item" data-section="sect-acara" onclick="navTo('sect-acara',this)"> <i
-                    class="fa fa-calendar"></i> </a>
-            <a class="nav-item" data-section="sect-adab" onclick="navTo('sect-adab',this)"> <i
-                    class="fa fa-star-and-crescent"></i> </a>
-            <a class="nav-item" data-section="sect-komentar" onclick="navTo('sect-komentar',this)"><i
-                    class="fa fa-comment"></i> </a>
-            <a class="nav-item" data-section="sect-gift" onclick="navTo('sect-gift',this)"> <i class="fa fa-gift"></i>
-            </a>
+            <a class="nav-item active" data-section="sect-cover" onclick="navTo('sect-cover',this)"><i class="fa fa-house"></i></a>
+            <a class="nav-item" data-section="sect-mempelai" onclick="navTo('sect-mempelai',this)"><i class="fa fa-heart"></i></a>
+            <a class="nav-item" data-section="sect-acara" onclick="navTo('sect-acara',this)"><i class="fa fa-calendar"></i></a>
+            <a class="nav-item" data-section="sect-adab" onclick="navTo('sect-adab',this)"><i class="fa fa-star-and-crescent"></i></a>
+            <a class="nav-item" data-section="sect-komentar" onclick="navTo('sect-komentar',this)"><i class="fa fa-comment"></i></a>
+            <a class="nav-item" data-section="sect-gift" onclick="navTo('sect-gift',this)"><i class="fa fa-gift"></i></a>
         </nav>
 
-        <!-- ================================================== -->
-        <!-- SECTION 1: HERO                                    -->
-        <!-- ================================================== -->
-        <section class="relative min-h-[100vh]" id="sect-cover">
-                
-            <!-- Flower decoration right -->
-            <img src="./assets/images/edge_flower_1.png" class="absolute right-0 bottom-0 w-50 translate-x-4 z-40 
-           origin-bottom animate-sway-right pointer-events-none" alt="">
-
-            <div class="flex">
-                <img src="./assets/images/left_hero_flower_top.png" class="absolute left-0 top-0 z-40"
-                    data-aos="fade-down" data-aos-duration="1500" alt="">
-                <img src="./assets/images/right_hero_flower_top.png" class="absolute right-0 top-0 z-40"
-                    data-aos="fade-down" data-aos-duration="1500" alt="">
+        <!-- ============================================
+             SECTION 1: HERO
+             ============================================ -->
+        <section id="sect-cover">
+            <div class="hero-flowers">
+                <img src="./assets/images/left_hero_flower_top.png" data-aos="fade-down" data-aos-duration="1500" alt="">
+                <img src="./assets/images/right_hero_flower_top.png" data-aos="fade-down" data-aos-duration="1500" alt="">
             </div>
 
-            <div class="flex h-[80vh] justify-center items-center relative z-10">
-                <img src="./assets/images/hero_suhemy_arni.png" class="" data-aos="zoom-in-up" data-aos-duration="1500"
-                    data-aos-delay="400" alt="">
+            <div class="hero-img-wrap">
+                <img src="./assets/images/hero_suhemy_arni.png" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-delay="400" alt="">
             </div>
+
+            <img src="./assets/images/edge_flower_1.png" class="edge-flower-right animate-sway-right" alt="">
         </section>
 
-        <!-- ================================================== -->
-        <!-- SECTION 2: AYAT                                    -->
-        <!-- ================================================== -->
-        <section class="relative z-30 h-0" id="">
-
-            <div class="absolute w-full top-0 left-0 -translate-y-[50%] flex justify-center items-center pointer-events-none">
-                <!-- Frame image as relative base for height -->
-                <img src="./assets/images/section2_frame.png" class="w-full relative z-10" alt="">
-                
-                <!-- Text image absolute over the frame -->
-                <div class="absolute z-12 inset-0 flex justify-center items-center pt-[15%]">
-                    <img src="./assets/images/section2_text.png" class="w-[85%]" data-aos="zoom-in"
-                        data-aos-duration="1200" alt="">
-                </div>
+        <!-- ============================================
+             FRAME DIVIDER: AYAT (section 2)
+             ============================================ -->
+        <div class="frame-divider">
+            <img src="./assets/images/section2_frame.png" class="frame-img" alt="">
+            <div class="frame-text">
+                <img src="./assets/images/section2_text.png" data-aos="zoom-in" data-aos-duration="1200" alt="">
             </div>
+        </div>
 
-        </section>
+        <!-- ============================================
+             SECTION 3: MEMPELAI
+             ============================================ -->
+        <section id="sect-mempelai">
+            <img src="./assets/images/edge_flower_2.png" class="mempelai-edge-left animate-sway-left" alt="">
+            <img src="./assets/images/edge_flower_3.png" class="mempelai-edge-right animate-sway-right" alt="">
 
-        <!-- ================================================== -->
-        <!-- SECTION 3: MEMPELAI                                -->
-        <!-- ================================================== -->
-        <section class="relative min-h-[140vh]" id="sect-mempelai">
-
-            <img src="./assets/images/edge_flower_2.png" class="absolute -left-5 bottom-64 w-50 translate-x-4 z-40 
-           origin-bottom animate-sway-left pointer-events-none" alt="">
-
-            <img src="./assets/images/edge_flower_3.png" class="absolute right-0 -bottom-30 w-50 translate-x-4 z-40 
-           origin-bottom animate-sway-right pointer-events-none" alt="">
-
-            <div class="relative z-10 flex flex-col gap-8"
-                style="padding-top: 50% !important; padding-bottom: 35% !important;">
+            <div class="mempelai-inner">
                 <!-- Bismillah -->
-                <div class="flex justify-center items-center" data-aos="fade-down" data-aos-duration="1200">
-                    <img src="./assets/images/bismillah.svg" class="w-[40%]" alt="">
+                <div data-aos="fade-down" data-aos-duration="1200" style="display:flex;justify-content:center;width:100%;padding:0 24px;">
+                    <img src="./assets/images/bismillah.svg" style="width:75%;max-width:280px;" alt="">
                 </div>
 
                 <!-- Quote -->
-                <div class="text-[#2C2C2C] font-inria flex justify-center items-center flex-col gap-6 text-sm"
-                    style="padding: 0px 20px;" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
-                    <div>
-                        <h1>
-                            Assalamu'alaikum Warahmatullahi Wabarakatuh
-                        </h1>
-                    </div>
-                    <div class="text-center" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
+                <div class="mempelai-quote" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+                    <div>Assalamu'alaikum Warahmatullahi Wabarakatuh</div>
+                    <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
                         Dengan Memohon Rahmat Dan Ridho Allah Subhanahu Wa Ta'ala Yang Telah Menciptakan Makhluk-Nya
                         Secara Berpasang-Pasangan, Kami Bermaksud Menyelenggarakan Pernikahan Kami.
                     </div>
                 </div>
 
                 <!-- Flower -->
-                <div class="flex justify-center items-center" data-aos="zoom-in" data-aos-duration="1500"
-                    data-aos-delay="600">
-                    <img src="./assets/images/mid_section_flower.png" class="w-[40%] animate-flower-float relative z-40" alt="">
+                <div style="display:flex;justify-content:center;" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="600">
+                    <img src="./assets/images/mid_section_flower.png" class="animate-flower-float" style="width:40%;max-width:160px;position:relative;z-index:40;" alt="">
                 </div>
 
-                <!-- Mempelai -->
-                <div class="flex flex-col gap-14 font-inria">
-                    <div class="text-center flex flex-col items-center gap-4" data-aos="fade-right" data-aos-duration="1200">
-                        <div class="flex justify-center items-center">
-                            <img src="./assets/images/arni_nabila_text.svg" class="w-[80%]" alt="">
-                        </div>
-                        <div class="text-sm" style="margin-top: 0">
-                            <p>
-                                Putri dari <br>
-                                Bapak Sahlani (Rahimahullah)<br>
-                                & Ibu Jaenah
-                            </p>
-                        </div>
+                <!-- Names -->
+                <div class="mempelai-names">
+                    <div class="mempelai-person" data-aos="fade-right" data-aos-duration="1200">
+                        <img src="./assets/images/arni_nabila_text.svg" alt="">
+                        <p>Putri dari<br>Bapak Sahlani (Rahimahullah)<br>&amp; Ibu Jaenah</p>
                     </div>
 
-                    <div class="flex justify-center items-center" data-aos="zoom-in" data-aos-duration="1000">
-                        <img src="./assets/images/boundaries.svg" class="w-[70%]" alt="">
+                    <div style="display:flex;justify-content:center;" data-aos="zoom-in" data-aos-duration="1000">
+                        <img src="./assets/images/boundaries.svg" class="mempelai-boundary" alt="">
                     </div>
 
-                    <div class="text-center flex flex-col items-center gap-4" style="margin-top: -20px;" data-aos="fade-left" data-aos-duration="1200">
-                        <div class="flex justify-center items-center">
-                            <img src="./assets/images/riswan_suhemy_text.svg" class="w-[80%]" alt="">
-                        </div>
-                        <div class="text-sm" style="margin-top: 0">
-                            <p>
-                                Putra dari <br>
-                                Bapak Jhon Endi Nv Batubara (Rahimahullah)<br>
-                                & Ibu Ade Irma Suryani
-                            </p>
-                        </div>
+                    <div class="mempelai-person" style="margin-top:-20px;" data-aos="fade-left" data-aos-duration="1200">
+                        <img src="./assets/images/riswan_suhemy_text.svg" alt="">
+                        <p>Putra dari<br>Bapak Jhon Endi Nv Batubara (Rahimahullah)<br>&amp; Ibu Ade Irma Suryani</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="relative z-30 h-0" id="sect-waktu-header">
-            <div class="absolute w-full top-0 left-0 -translate-y-[50%] flex justify-center items-center pointer-events-none">
-                <img src="./assets/images/section4_frame.png" class="w-full relative z-10" alt="">
+        <!-- ============================================
+             FRAME DIVIDER: SECTION 4 HEADER (waktu)
+             ============================================ -->
+        <div class="frame-divider">
+            <img src="./assets/images/section4_frame.png" class="frame-img" alt="">
+            <div class="frame-text">
+                <img src="./assets/images/section4_text.png" data-aos="zoom-in" data-aos-duration="1200" alt="">
+            </div>
+        </div>
 
-                <div class="absolute z-12 inset-0 flex justify-center items-center pt-[10%]">
-                    <img src="./assets/images/section4_text.png" class="w-[85%]" data-aos="zoom-in"
-                        data-aos-duration="1200" alt="">
+        <!-- ============================================
+             SECTION 4: ACARA
+             ============================================ -->
+        <section id="sect-acara">
+            <img src="./assets/images/edge_flower_2.png" class="acara-edge-left animate-sway-left" alt="">
+            <img src="./assets/images/edge_flower_3.png" class="acara-edge-right animate-sway-right" alt="">
+
+            <!-- THE ARCH CARD -->
+            <div class="arch-card" style="position:relative;z-index:10;">
+                <!-- This image defines the card height via its natural aspect ratio -->
+                <img src="./assets/images/waktu_background.svg" class="arch-bg" alt="">
+
+                <!-- Content sits absolutely over the image -->
+                <div class="arch-content">
+                    <!-- Date -->
+                    <div class="arch-date" data-aos="fade-down" data-aos-duration="1200">
+                        <span>Ahad</span>
+                        <span class="sep">|</span>
+                        <span class="day-month">28<br>Juni</span>
+                        <span class="sep">|</span>
+                        <span>2026</span>
+                    </div>
+
+                    <!-- Akad Nikah -->
+                    <div class="arch-event" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
+                        <h2 class="arch-event-title">Akad Nikah</h2>
+                        <p class="arch-event-time">Pukul 09:00 WIB</p>
+                    </div>
+                    <div class="arch-event" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
+                        <div class="arch-map-icon"><i class="fa-regular fa-map"></i></div>
+                        <p class="arch-event-loc">Kp. Cigaroggol RT 06 RW 02 Taman Buah<br>Mekarsari, Cileungsi - Bogor</p>
+                    </div>
+
+                    <div class="arch-divider"></div>
+
+                    <!-- Resepsi -->
+                    <div class="arch-event" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                        <h2 class="arch-event-title">Resepsi</h2>
+                        <p class="arch-event-time">Pukul 10:00 WIB - Selesai</p>
+                    </div>
+                    <div class="arch-event" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
+                        <div class="arch-map-icon"><i class="fa-regular fa-map"></i></div>
+                        <p class="arch-event-loc">Kp. Cigaroggol RT 06 RW 02 Taman Buah<br>Mekarsari, Cileungsi - Bogor</p>
+                    </div>
+
+                    <a class="btn-maps" href="https://maps.app.goo.gl/amqYRoF8eMSV4dbW9" target="_blank"
+                        data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="600">
+                        <i class="fa fa-map-location-dot"></i> Lihat Lokasi
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- ================================================== -->
-        <!-- SECTION 3: ACARA                                   -->
-        <!-- ================================================== -->
-        <section class="relative min-h-[110vh] bg-[#fdf8f0] flex flex-col justify-center items-center pt-[35%] pb-[40%]" id="sect-acara">
-
-            <img src="./assets/images/edge_flower_2.png" class="absolute -left-5 top-1/4 w-50 translate-x-4 z-40 
-           origin-bottom animate-sway-left pointer-events-none" alt="">
-
-            <img src="./assets/images/edge_flower_3.png" class="absolute right-0 bottom-1/4 w-50 translate-x-4 z-40 
-           origin-bottom animate-sway-right pointer-events-none" alt="">
-
-            <div class="relative w-[100%] max-w-[2000px] mx-auto z-10 flex justify-center items-center">
-                <!-- Arch image that dictates the aspect ratio and height -->
-                <img src="./assets/images/waktu_background.svg" class="w-full h-auto drop-shadow-md relative z-10" alt="">
-                
-                <!-- Text container mapped exactly over the image -->
-                <div class="absolute z-12 inset-0 flex flex-col justify-center items-center gap-4 py-[12%] px-2">
-
-                    <div class="flex justify-center items-center text-center font-inria gap-2 text-[#DDBF8A] text-[1.5rem]"
-                        data-aos="fade-down" data-aos-duration="1200">
-                        <h1>Ahad</h1>
-                        <span class="text-3xl font-bold">|</span>
-                        <h1 class="text-center leading-none">28 <br> Juni</h1>
-                        <span class="text-3xl font-bold">|</span>
-                        <h1>2026</h1>
+        <!-- ============================================
+             FRAME DIVIDER: COUNTDOWN (section waktu)
+             ============================================ -->
+        <div class="frame-divider countdown-frame">
+            <img src="./assets/images/section4_frame.png" class="frame-img" alt="">
+            <div class="frame-text" style="pointer-events:auto;">
+                <p class="cd-label" data-aos="fade-down" data-aos-duration="1200">Hitung Mundur Acara</p>
+                <div class="cd-boxes">
+                    <div class="cd-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
+                        <span id="cd-hari" class="cd-num">00</span>
+                        <span class="cd-unit">Hari</span>
                     </div>
-
-                    <div class="flex flex-col gap-6 w-full mt-2">
-                        <!-- Akad Nikah -->
-                        <div class="flex flex-col justify-center items-center gap-4">
-                            <!-- Top -->
-                            <div class="flex flex-col justify-center items-center" data-aos="fade-right"
-                                data-aos-duration="1200" data-aos-delay="200">
-                                <div class="font-vibes text-[2rem] leading-none text-[#DDBF8A]">
-                                    <h1><span class="font-grey-qo text-[3rem]">A</span>kad &nbsp; <span
-                                            class="font-grey-qo text-[3rem]">N</span>ikah</h1>
-                                </div>
-                                <div>
-                                    <p class="font-inria text-[1.2rem] text-[#5a5a5a]">Pukul 09:00 WIB</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Bottom -->
-                            <div class="flex flex-col justify-center items-center font-inria" data-aos="fade-up"
-                                data-aos-duration="1200" data-aos-delay="400">
-                                <div class="text-[#DDBF8A] text-2xl mb-1">
-                                    <i class="fa-regular fa-map"></i>
-                                </div>
-                                <div class="text-center leading-tight text-[15px] text-[#5a5a5a]">
-                                    <p>Kp. Cigaroggol RT 06 RW 02 Taman Buah <br> Mekarsari, Cileungsi - Bogor</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Resepsi -->
-                        <div class="flex flex-col justify-center items-center gap-4">
-                            <!-- Top -->
-                            <div class="flex flex-col justify-center items-center" data-aos="fade-left"
-                                data-aos-duration="1200" data-aos-delay="200">
-                                <div class="font-vibes text-[3rem] leading-none text-[#DDBF8A]">
-                                    <h1>Resepsi</h1>
-                                </div>
-                                <div>
-                                    <p class="font-inria text-[1.2rem] text-[#5a5a5a]">Pukul 10:00 WIB - Selesai</p>
-                                </div>
-                            </div>
-
-                            <!-- Bottom -->
-                            <div class="flex flex-col justify-center items-center font-inria" data-aos="fade-up"
-                                data-aos-duration="1200" data-aos-delay="400">
-                                <div class="text-[#DDBF8A] text-2xl mb-1">
-                                    <i class="fa-regular fa-map"></i>
-                                </div>
-                                <div class="text-center leading-tight text-[15px] text-[#5a5a5a]">
-                                    <p>Kp. Cigaroggol RT 06 RW 02 Taman Buah <br> Mekarsari, Cileungsi - Bogor</p>
-                                </div>
-                            </div>
-
-                            <a class="btn-maps mt-1 pointer-events-auto" style="padding: 6px 14px; font-size: 18px;" href="https://maps.app.goo.gl/amqYRoF8eMSV4dbW9" target="_blank"
-                                data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="600">
-                                <i class="fa fa-map-location-dot"></i> Lihat Lokasi
-                            </a>
-                        </div>
+                    <div class="cd-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300">
+                        <span id="cd-jam" class="cd-num">00</span>
+                        <span class="cd-unit">Jam</span>
+                    </div>
+                    <div class="cd-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+                        <span id="cd-menit" class="cd-num">00</span>
+                        <span class="cd-unit">Menit</span>
+                    </div>
+                    <div class="cd-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="700">
+                        <span id="cd-detik" class="cd-num">00</span>
+                        <span class="cd-unit">Detik</span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="relative z-30 h-0" id="sect-waktu">
-
-            <div class="absolute w-full top-0 left-0 -translate-y-[50%] flex justify-center items-center pointer-events-none">
-                <!-- Frame image as relative base -->
-                <img src="./assets/images/section4_frame.png" class="w-full relative z-10" alt="">
-
-                <div class="absolute z-12 inset-0 flex flex-col items-center justify-center gap-3 pt-4 pointer-events-auto">
-                    <div class="text-center font-inria text-white" data-aos="fade-down" data-aos-duration="1200">
-                        <h1>Hitung Mundur Acara</h1>
-                    </div>
-                    <div class="flex justify-center items-center gap-2 sm:gap-3">
-                        <div class="flex flex-col items-center justify-center w-16 h-14 sm:w-20 sm:h-16 border-2 sm:border-3 border-[#DDBF8A] rounded-md"
-                            style="background:#7D7549;" data-aos="zoom-in" data-aos-duration="1000"
-                            data-aos-delay="100">
-                            <span id="cd-hari" class="text-2xl sm:text-3xl font-light text-[#f0ead8]"
-                                style="font-family:'Cormorant Garamond',serif;">00</span>
-                            <span class="text-[10px] sm:text-xs text-[#f0ead8]"
-                                style="font-family:'Cormorant Garamond',serif;">Hari</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center w-16 h-14 sm:w-20 sm:h-16 border-2 sm:border-3 border-[#DDBF8A] rounded-md"
-                            style="background:#7D7549;" data-aos="zoom-in" data-aos-duration="1000"
-                            data-aos-delay="300">
-                            <span id="cd-jam" class="text-2xl sm:text-3xl font-light text-[#f0ead8]"
-                                style="font-family:'Cormorant Garamond',serif;">00</span>
-                            <span class="text-[10px] sm:text-xs text-[#f0ead8]"
-                                style="font-family:'Cormorant Garamond',serif;">Jam</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center w-16 h-14 sm:w-20 sm:h-16 border-2 sm:border-3 border-[#DDBF8A] rounded-md"
-                            style="background:#7D7549;" data-aos="zoom-in" data-aos-duration="1000"
-                            data-aos-delay="500">
-                            <span id="cd-menit" class="text-2xl sm:text-3xl font-light text-[#f0ead8]"
-                                style="font-family:'Cormorant Garamond',serif;">00</span>
-                            <span class="text-[10px] sm:text-xs text-[#f0ead8]"
-                                style="font-family:'Cormorant Garamond',serif;">Menit</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center w-16 h-14 sm:w-20 sm:h-16 border-2 sm:border-3 border-[#DDBF8A] rounded-md"
-                            style="background:#7D7549;" data-aos="zoom-in" data-aos-duration="1000"
-                            data-aos-delay="700">
-                            <span id="cd-detik" class="text-2xl sm:text-3xl font-light text-[#f0ead8]"
-                                style="font-family:'Cormorant Garamond',serif;">00</span>
-                            <span class="text-[10px] sm:text-xs text-[#f0ead8]"
-                                style="font-family:'Cormorant Garamond',serif;">Detik</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- ================================================== -->
-        <!-- SECTION 4: ADAB WALIMAH                            -->
-        <!-- ================================================== -->
-        <section class="relative flex flex-col gap-8 min-h-[75vh]" id="sect-adab" style="padding: 42% 0;">
-
-            <!-- Header -->
-            <div class="flex flex-col items-center gap-4 mb-10" data-aos="fade-down" data-aos-duration="1200" style="margin-bottom: 2rem;">
-                <div class="flex flex-col items-center gap-2">
-                    <p class="font-vibes text-[#DDBF8A] text-5xl">Adab Walimah</p>
-                    <div class="w-16 h-px bg-[#DDBF8A] opacity-60"></div>
-                </div>
-                <p class="font-inria text-center text-sm text-[#5a5a5a] leading-relaxed mt-1" style="padding: 0 24px;">
+        <!-- ============================================
+             SECTION 5: ADAB WALIMAH
+             ============================================ -->
+        <section id="sect-adab">
+            <div class="adab-header" data-aos="fade-down" data-aos-duration="1200">
+                <p class="adab-title">Adab Walimah</p>
+                <div class="adab-line"></div>
+                <p class="adab-subtitle">
                     Tanpa mengurangi rasa hormat, dimohon kepada para tamu undangan
                     untuk memperhatikan hal-hal berikut:
                 </p>
             </div>
 
-            <div class="flex flex-col gap-8">
-                <!-- Row 1: 3 icons -->
-                <div class="flex flex-row justify-center gap-2 px-4 mb-8" data-aos="fade-up" data-aos-duration="1200"
-                    data-aos-delay="200">
-
-                    <!-- Card 1 -->
-                    <div class="flex flex-col items-center gap-3 w-28">
-                        <div class="rounded-full flex items-center justify-center">
-                            <img src="./assets/images/adaba_walimah_1.svg" alt="Dokumentasi"
-                                class="w-[72px] object-contain">
-                        </div>
-                        <p class="font-inria text-center text-xs text-[#5a5a5a] leading-snug">
-                            Memperhatikan Waktu Sholat
-                        </p>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="flex flex-col items-center gap-3 w-28">
-                        <div class="rounded-full flex items-center justify-center">
-                            <img src="./assets/images/adaba_walimah_2.svg" alt="Berpakaian"
-                                class="w-[72px] object-contain">
-                        </div>
-                        <p class="font-inria text-center text-xs text-[#5a5a5a] leading-snug">
-                            Berpakaian Rapi &amp; Sopan
-                        </p>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="flex flex-col items-center gap-3 w-28">
-                        <div class="rounded-full flex items-center justify-center">
-                            <img src="./assets/images/adaba_walimah_3.svg" alt="Adab Makan"
-                                class="w-[72px] object-contain">
-                        </div>
-                        <p class="font-inria text-center text-xs text-[#5a5a5a] leading-snug">
-                            Memperhatikan Adab Makan
-                        </p>
-                    </div>
-
+            <!-- Row 1: 3 icons -->
+            <div class="adab-row" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+                <div class="adab-card">
+                    <img src="./assets/images/adaba_walimah_1.svg" alt="Waktu Sholat">
+                    <p>Memperhatikan Waktu Sholat</p>
                 </div>
+                <div class="adab-card">
+                    <img src="./assets/images/adaba_walimah_2.svg" alt="Berpakaian">
+                    <p>Berpakaian Rapi &amp; Sopan</p>
+                </div>
+                <div class="adab-card">
+                    <img src="./assets/images/adaba_walimah_3.svg" alt="Adab Makan">
+                    <p>Memperhatikan Adab Makan</p>
+                </div>
+            </div>
 
-                <!-- Row 2: 2 icons centered -->
-                <div class="flex flex-row justify-center gap-4 px-4" data-aos="fade-up" data-aos-duration="1200"
-                    data-aos-delay="400">
-
-                    <!-- Card 4 -->
-                    <div class="flex flex-col items-center gap-3 w-28">
-                        <div class="rounded-full flex items-center justify-center">
-                            <img src="./assets/images/adaba_walimah_4.svg" alt="Foto Pengantin"
-                                class="w-[72px] object-contain">
-                        </div>
-                        <p class="font-inria text-center text-xs text-[#5a5a5a] leading-snug">
-                            Tidak Memfoto/ Video Pengantin Tanpa Izin
-                        </p>
-                    </div>
-
-                    <!-- Card 5 -->
-                    <div class="flex flex-col items-center gap-3 w-28">
-                        <div class="rounded-full flex items-center justify-center">
-                            <img src="./assets/images/adaba_walimah_5.svg" alt="Non-mahrom"
-                                class="w-[72px] object-contain">
-                        </div>
-                        <p class="font-inria text-center text-xs text-[#5a5a5a] leading-snug">
-                            Tidak Berjabat dengan Non-mahrom
-                        </p>
-                    </div>
-
+            <!-- Row 2: 2 icons -->
+            <div class="adab-row" style="margin-top:24px;" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400">
+                <div class="adab-card">
+                    <img src="./assets/images/adaba_walimah_4.svg" alt="Foto Pengantin">
+                    <p>Tidak Memfoto/ Video Pengantin Tanpa Izin</p>
+                </div>
+                <div class="adab-card">
+                    <img src="./assets/images/adaba_walimah_5.svg" alt="Non-mahrom">
+                    <p>Tidak Berjabat dengan Non-mahrom</p>
                 </div>
             </div>
         </section>
 
-        <section class="relative z-30 h-0" id="sect-ayat">
-
-            <!-- Flower decoration right -->
-            <img src="./assets/images/edge_flower_1.png" class="absolute right-0 -top-20 w-50 translate-x-4 z-40 
-           origin-bottom animate-sway-right pointer-events-none" alt="">
-
-            <div class="absolute w-full top-0 left-0 -translate-y-[50%] flex justify-center items-center pointer-events-none">
-                <img src="./assets/images/section6_frame.png" class="w-full relative z-10" alt="">
-
-                <div class="absolute z-12 inset-0 flex justify-center items-center pt-[8%] pointer-events-auto">
-                    <img src="./assets/images/section6_text.png" class="w-[85%]" data-aos="zoom-in"
-                        data-aos-duration="1200" alt="">
-                </div>
+        <!-- ============================================
+             FRAME DIVIDER: SECTION 6 (ayat)
+             ============================================ -->
+        <div class="frame-divider" style="position:relative;">
+            <img src="./assets/images/edge_flower_1.png"
+                style="position:absolute;right:-8px;top:-5rem;width:clamp(90px,26vw,160px);z-index:50;pointer-events:none;" 
+                class="animate-sway-right" alt="">
+            <img src="./assets/images/section6_frame.png" class="frame-img" alt="">
+            <div class="frame-text" style="padding-top:8%;pointer-events:auto;">
+                <img src="./assets/images/section6_text.png" data-aos="zoom-in" data-aos-duration="1200" alt="">
             </div>
+        </div>
 
-        </section>
-
-        <!-- ================================================== -->
-        <!-- SECTION 5: KOMENTAR / UCAPAN                       -->
-        <!-- ================================================== -->
-        <section class="bg-[#fdf8f0]" id="sect-komentar">
-
-            <div class="section-inner" style="padding-top: 50%;">
-                <p class="font-vibes text-[#DDBF8A] text-4xl text-center" style="margin-bottom: 2rem;"
-                    data-aos="fade-down">Kesan &nbsp; &
-                    &nbsp; Ucapan Pernikahan</p>
+        <!-- ============================================
+             SECTION 7: KOMENTAR / UCAPAN
+             ============================================ -->
+        <section id="sect-komentar">
+            <div class="section-inner" style="padding-top:80px;">
+                <p class="font-vibes text-gold" style="font-size:clamp(28px,9vw,40px);text-align:center;margin-bottom:2rem;" data-aos="fade-down">
+                    Kesan &amp; Ucapan Pernikahan
+                </p>
 
                 <div class="comment-form" data-aos="fade-up" data-aos-delay="100">
                     <input type="text" id="cmtNama" placeholder="Nama Lengkap" class="cmt-input" />
@@ -458,21 +820,23 @@
 
                 <div class="pagination" id="pagination"></div>
             </div>
-
         </section>
 
-        <section class=" bg-[#fdf8f0]" id="sect-gift">
-            <div class="section-inner font-inria text-center flex flex-col gap-4">
-                <p class="" data-aos="fade-down">
-                    Doa Restu Anda merupakan <br> karunia yang sangat berarti bagi kami.
+        <!-- ============================================
+             SECTION 8: GIFT
+             ============================================ -->
+        <section id="sect-gift">
+            <div class="section-inner font-inria" style="text-align:center;display:flex;flex-direction:column;gap:16px;padding-top:120px;padding-bottom:40px;">
+                <p data-aos="fade-down">
+                    Doa Restu Anda merupakan<br>karunia yang sangat berarti bagi kami.
                 </p>
-                <p class="text-sm" data-aos="fade-up" data-aos-delay="100">
+                <p style="font-size:clamp(12px,3.5vw,14px);" data-aos="fade-up" data-aos-delay="100">
                     Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.
                 </p>
 
                 <div class="gift-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-full flex justify-center items-center h-fit ">
-                        <img src="./assets/images/logo_bsi.png" class="w-[50%]" style="margin-bottom: 1rem;" alt="">
+                    <div style="width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:1rem;">
+                        <img src="./assets/images/logo_bsi.png" style="width:50%;max-width:180px;" alt="">
                     </div>
                     <p class="gift-rek">Riswan Suhemy Batubara</p>
                     <div class="gift-norek-wrap">
@@ -483,19 +847,19 @@
             </div>
         </section>
 
-        <section class="bg-[#fdf8f0] relative w-[100%] overflow-hidden pb-10 pt-20">
-            <div class="relative flex justify-center items-center">
-                <img src="./assets/images/footer_frame.png" class="w-full relative z-10" alt="">
-                
-                <div class="absolute z-12 inset-0 flex justify-center items-center pt-16">
-                    <img src="./assets/images/footer_text.png" class="w-[85%]" data-aos="zoom-in" data-aos-duration="1500"
-                        alt="">
+        <!-- ============================================
+             FOOTER
+             ============================================ -->
+        <section style="background:#fdf8f0;position:relative;width:100%;overflow:hidden;padding-bottom:60px;padding-top:0;">
+            <div style="position:relative;display:flex;justify-content:center;align-items:center;">
+                <img src="./assets/images/footer_frame.png" style="width:100%;display:block;position:relative;z-index:10;" alt="">
+                <div style="position:absolute;inset:0;display:flex;justify-content:center;align-items:center;padding-top:16%;z-index:12;">
+                    <img src="./assets/images/footer_text.png" style="width:85%;max-width:340px;" data-aos="zoom-in" data-aos-duration="1500" alt="">
                 </div>
             </div>
         </section>
 
-
-    </div><!-- /phone-shell -->
+    </div><!-- /#app-shell -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="js/home.js"></script>
