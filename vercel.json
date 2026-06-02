@@ -1,3 +1,8 @@
 {
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "routes": [
+    { "src": "/generator", "dest": "/generator.html" },
+    { "src": "/home", "dest": "/home.html" },
+    { "src": "/", "dest": "/index.html" }
+  ]
 }
