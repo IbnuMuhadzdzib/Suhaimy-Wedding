@@ -235,6 +235,8 @@ body.cover-body {
 .bottom-nav {
   position: fixed;
   bottom: 0;
+  left: 50%;                        /* ← tambah ini */
+  transform: translateX(-50%);      /* ← tambah ini */
   width: 100%;
   max-width: var(--phone-w);
   height: 60px;
