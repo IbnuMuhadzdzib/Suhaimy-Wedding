@@ -17,7 +17,7 @@
 
     <style>
         /* =====================================================
-           RESET & BASE — override anything from external CSS
+           RESET & BASE
            ===================================================== */
         *, *::before, *::after { box-sizing: border-box; }
 
@@ -39,7 +39,6 @@
             margin: 0 auto;
             background: #fdf8f0;
             overflow-x: hidden;
-            /* DO NOT set overflow-y hidden — kills sticky/fixed children */
         }
 
         @media (min-width: 430px) {
@@ -58,21 +57,14 @@
 
         /* =====================================================
            FRAME TRANSITION WRAPPER
-           These decorative frames sit BETWEEN two content
-           sections and overlap both by a fixed amount.
-           Strategy: use negative margin to pull up, do NOT
-           use h-0 + absolute positioning.
            ===================================================== */
         .frame-divider {
             position: relative;
             width: 100%;
-            /* overlap the section above by ~60px */
             margin-top: -60px;
-            /* overlap the section below by ~60px */
             margin-bottom: -60px;
             z-index: 20;
             pointer-events: none;
-            /* isolate stacking context */
             isolation: isolate;
         }
 
@@ -84,15 +76,18 @@
             z-index: 1;
         }
 
+        /* Base frame-text: pakai flexbox centered, padding reset */
         .frame-divider > .frame-text {
             position: absolute;
             inset: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 2;
-            /* push text below top decorative band of the frame */
-            padding-top: 12%;
+            /* default offset — di-override per frame lewat inline style */
+            padding-top: 0;
+            padding-bottom: 4%;
         }
 
         .frame-divider > .frame-text img {
@@ -100,17 +95,15 @@
             max-width: 340px;
         }
 
-        /* countdown frame has text + boxes stacked vertically */
+        /* countdown frame */
         .frame-divider.countdown-frame > .frame-text {
-            flex-direction: column;
             gap: 8px;
-            padding-top: 8%;
-            padding-bottom: 4%;
             pointer-events: auto;
         }
 
         /* =====================================================
            SECTION 1: HERO
+           — FIX: hapus padding samping, gambar full width
            ===================================================== */
         #sect-cover {
             min-height: 100svh;
@@ -129,10 +122,10 @@
         }
 
         .hero-flowers img {
-            /* natural width from original, but capped */
-            max-width: 45%;
+            max-width: 48%;
         }
 
+        /* FIX: padding 0 supaya gambar bisa lebih besar */
         .hero-img-wrap {
             display: flex;
             justify-content: center;
@@ -140,10 +133,12 @@
             min-height: 85svh;
             position: relative;
             z-index: 10;
-            padding: 0 8px;
+            padding: 0; /* ← was: 0 8px */
         }
 
+        /* FIX: width 100% supaya gambar penuh */
         .hero-img-wrap img {
+            width: 100%;  /* ← was: max-width 100% */
             max-width: 100%;
             height: auto;
         }
@@ -162,7 +157,6 @@
            ===================================================== */
         #sect-mempelai {
             background: #fdf8f0;
-            /* top padding accounts for frame-divider overlap from above */
             padding-top: 120px;
             padding-bottom: 120px;
             overflow: hidden;
@@ -242,13 +236,6 @@
 
         /* =====================================================
            SECTION 4: ACARA (THE ARCH)
-           KEY FIX: The arch is a self-contained card.
-           We do NOT use absolute positioned text over a
-           percentage-padded container — that breaks on
-           every screen size differently.
-           Instead: the arch background is set as a CSS
-           background-image on the card, and we control
-           exact pixel-safe padding.
            ===================================================== */
         #sect-acara {
             background: #fdf8f0;
@@ -278,13 +265,6 @@
             pointer-events: none;
         }
 
-        /*
-          The arch card approach:
-          - outer div: position:relative, contains the bg img + content
-          - img.arch-bg: display:block, width:100%, this sets the HEIGHT
-          - div.arch-content: position:absolute, inset:0
-            padding uses % of width (not height) so it's predictable
-        */
         .arch-card {
             position: relative;
             width: 88%;
@@ -306,13 +286,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            /* 
-              The arch SVG has a decorative dome at the top that's
-              roughly 18% of the image height.
-              Since width ≈ height for this arch, padding-top as % of 
-              width approximates height percentage reliably.
-              We tested: 22% top clears the dome on all sizes.
-            */
             padding: 22% 12px 8% 12px;
             gap: 0;
         }
@@ -340,7 +313,6 @@
             line-height: 1.2;
         }
 
-        /* Event block (Akad / Resepsi) */
         .arch-event {
             display: flex;
             flex-direction: column;
@@ -591,10 +563,11 @@
 
         <!-- ============================================
              FRAME DIVIDER: AYAT (section 2)
+             FIX: padding-top 8%, padding-bottom 8% supaya teks presisi di tengah frame
              ============================================ -->
         <div class="frame-divider">
             <img src="./assets/images/section2_frame.png" class="frame-img" alt="">
-            <div class="frame-text">
+            <div class="frame-text" style="padding-top:8%; padding-bottom:8%;">
                 <img src="./assets/images/section2_text.png" data-aos="zoom-in" data-aos-duration="1200" alt="">
             </div>
         </div>
@@ -646,11 +619,12 @@
         </section>
 
         <!-- ============================================
-             FRAME DIVIDER: SECTION 4 HEADER (waktu)
+             FRAME DIVIDER: SECTION 4 HEADER (waktu/undangan)
+             FIX: padding-top 6%, padding-bottom 10% — frame ini lebih tinggi bagian atasnya
              ============================================ -->
         <div class="frame-divider">
             <img src="./assets/images/section4_frame.png" class="frame-img" alt="">
-            <div class="frame-text">
+            <div class="frame-text" style="padding-top:6%; padding-bottom:10%;">
                 <img src="./assets/images/section4_text.png" data-aos="zoom-in" data-aos-duration="1200" alt="">
             </div>
         </div>
@@ -664,10 +638,8 @@
 
             <!-- THE ARCH CARD -->
             <div class="arch-card" style="position:relative;z-index:10;">
-                <!-- This image defines the card height via its natural aspect ratio -->
                 <img src="./assets/images/waktu_background.svg" class="arch-bg" alt="">
 
-                <!-- Content sits absolutely over the image -->
                 <div class="arch-content">
                     <!-- Date -->
                     <div class="arch-date" data-aos="fade-down" data-aos-duration="1200">
@@ -709,11 +681,12 @@
         </section>
 
         <!-- ============================================
-             FRAME DIVIDER: COUNTDOWN (section waktu)
+             FRAME DIVIDER: COUNTDOWN
+             FIX: padding-top 5%, padding-bottom 8%
              ============================================ -->
         <div class="frame-divider countdown-frame">
             <img src="./assets/images/section4_frame.png" class="frame-img" alt="">
-            <div class="frame-text" style="pointer-events:auto;">
+            <div class="frame-text" style="pointer-events:auto; padding-top:5%; padding-bottom:8%;">
                 <p class="cd-label" data-aos="fade-down" data-aos-duration="1200">Hitung Mundur Acara</p>
                 <div class="cd-boxes">
                     <div class="cd-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
@@ -779,14 +752,15 @@
         </section>
 
         <!-- ============================================
-             FRAME DIVIDER: SECTION 6 (ayat)
+             FRAME DIVIDER: SECTION 6 (doa pengantin)
+             FIX: padding-top 6%, padding-bottom 10%
              ============================================ -->
         <div class="frame-divider" style="position:relative;">
             <img src="./assets/images/edge_flower_1.png"
-                style="position:absolute;right:-8px;top:-5rem;width:clamp(90px,26vw,160px);z-index:50;pointer-events:none;" 
+                style="position:absolute;right:-8px;top:-5rem;width:clamp(90px,26vw,160px);z-index:50;pointer-events:none;"
                 class="animate-sway-right" alt="">
             <img src="./assets/images/section6_frame.png" class="frame-img" alt="">
-            <div class="frame-text" style="padding-top:8%;pointer-events:auto;">
+            <div class="frame-text" style="padding-top:6%; padding-bottom:10%; pointer-events:auto;">
                 <img src="./assets/images/section6_text.png" data-aos="zoom-in" data-aos-duration="1200" alt="">
             </div>
         </div>
