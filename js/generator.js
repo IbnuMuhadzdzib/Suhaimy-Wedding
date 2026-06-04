@@ -4,34 +4,35 @@
 
 // ---- Fungsi buat pesan WA per tamu ----
 function buildWAMessage(name, url) {
-  return `💌 *UNDANGAN PERNIKAHAN* 💌
-     بِسْــــــــــــــمِ اللهِ الرَّحْمَنِ الرَّحِيْـــــم
-_Assalamu'alaikum Warahmatullahi Wabarakaatuh_ 🌿
+  return `*UNDANGAN PERNIKAHAN*
 
-🎊 Alhamdulillah! Segala puji bagi Allah Subhanahu Wa Ta'ala yang telah menciptakan makhluk-Nya berpasang-pasangan. 💞
+     بِسْــــــــــــــمِ اللهِ الرَّحْمَنِ الرَّحِيْـــــم
+_Assalamu'alaikum Warahmatullahi Wabarakaatuh_
+
+Alhamdulillah! Segala puji bagi Allah Subhanahu Wa Ta'ala yang telah menciptakan makhluk-Nya berpasang-pasangan. 
 
 Kepada Yth.
-*${name}* 🌸
+*${name}* 
 
 Dengan penuh kebahagiaan dan kerendahan hati, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk turut berbahagia bersama kami dalam acara Walimatul 'Urs:
 
 💍 *Riswan Suhemy Batubara*
 💕 *Arni Nabila*
 
-📅 Ahad, 28 Juni 2026
-🕘 Akad : 09.00 WIB | Resepsi : 10.00 WIB
-📍 Kp. Cigaroggol RT 06 RW 02 Taman Buah Mekarsari, Cileungsi - Bogor
+Tanggal : Ahad, 28 Juni 2026
+Akad    : 09.00 WIB | Resepsi : 10.00 WIB
+Lokasi  : Kp. Cigaroggol RT 06 RW 02 Taman Buah Mekarsari, Cileungsi - Bogor
 
-✨ Berikut tautan undangan digital kami:
+Berikut tautan undangan digital kami:
 ${url}
 
-Kehadiran serta doa restu Bapak/Ibu/Saudara/i adalah kehormatan dan kebahagiaan terbesar bagi kami. Semoga Allah Subhanahu Wa Ta'ala mempertemukan kita semua dalam suasana yang penuh keberkahan. 🤲
+Kehadiran serta doa restu Bapak/Ibu/Saudara/i adalah kehormatan dan kebahagiaan terbesar bagi kami. Semoga Allah Subhanahu Wa Ta'ala mempertemukan kita semua dalam suasana yang penuh keberkahan. 
 
-_Jazakumullahu Khairan wa Barakallahu Fiikum_ 🌺
-_Wassalamu'alaikum Warahmatullahi Wabarakaatuh_ 💚
+_Jazakumullahu Khairan wa Barakallahu Fiikum_ 
+_Wassalamu'alaikum Warahmatullahi Wabarakaatuh_ 
 
 *Kami Yang Berbahagia,*
-*Arni & Suhaimy* 🫶`;
+*Arni & Suhaimy* `;
 }
 
 // ---- Generate ----
